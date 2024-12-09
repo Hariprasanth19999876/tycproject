@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYC ROHS</title>
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container-fluid {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .panel {
+            background: linear-gradient(to right, #2980b9, #3b6086);
+            border-radius: 10px;
+            border: none;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+        .panel .panel-heading {
+            padding: 20px 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel .panel-heading .title {
+            color: #fff;
+            font-size: 28px;
+            font-weight: 500;
+        }
+        .panel .panel-heading .btn_group {
+            display: flex;
+            gap: 10px;
+        }
+        .panel .panel-heading .btn {
+            color: rgba(255, 255, 255, 0.8);
+            background: transparent;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .panel .panel-heading .btn:hover {
+            color: #fff;
+        }
+        .panel .panel-heading .form-control {
+            color: #fff;
+            background-color: transparent;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .panel .panel-body {
+            overflow-y: auto;
+            height: calc(100% - 150px); /* Adjusted to include space for footer */
+            padding: 0 15px;
+        }
+        .table {
+            color: #fff;
+            border-radius: 10px;
+            table-layout: auto; /* Allow rows to adjust width automatically */
+            width: 100%;
+            border-collapse: collapse; /* Ensures borders between cells are neat */
+            position: relative; /* Required for sticky headers to work properly */
+        }
+
+        .table thead th {
+            background-color: #333; /* Solid/semi-transparent background to cover scrolling text */
+            padding: 15px;
+            border: 2px solid rgba(24, 22, 22, 0.8); /* Adds visible borders */
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            text-align: center; /* Center the text in headers */
+            z-index: 10; /* Ensure headers stay on top of the scrolling content */
+            color: #fff;
+        }
+
+        .table tbody tr td {
+            border: 1px solid #474747; /* Visible borders between columns */
+            padding: 10px;
+            white-space: normal; /* Allow text wrapping */
+            overflow: hidden; /* Prevent overflow */
+            text-align: center; /* Center-align text in table cells */
+        }
+
+        .table tbody tr td.customer-comment {
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Hide overflowing text */
+            text-overflow: ellipsis; /* Adds ellipsis to truncated text */
+            max-width: 150px; /* Limit the width for truncation */
+            cursor: pointer; /* Indicates the text is clickable */
+            position: relative;
+        }
+
+        .table tbody tr td.customer-comment .tooltip {
+            display: none; /* Tooltip is hidden by default */
+            position: absolute;
+            background-color: #333; /* Dark tooltip background */
+            color: #fff; /* White text for readability */
+            padding: 5px;
+            border-radius: 5px; /* Rounded corners */
+            max-width: 300px;
+            white-space: normal; /* Allow tooltip text to wrap */
+            z-index: 20; /* Ensure the tooltip appears above other elements */
+            top: 100%; /* Position the tooltip below the text */
+            left: 0; /* Align it with the text */
+        }
+
+        .table tbody tr td.customer-comment:hover .tooltip {
+            display: block; /* Show tooltip on hover */
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.1); /* Light background for odd rows */
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker background for even rows */
+        }
+
+        .panel .panel-footer {
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .action-list li a {
+            color: #0f1c24; /* Change this to your desired color */
+            text-decoration: none; /* Remove underline */
+            display: flex; /* Flexbox for aligning icon and text */
+            align-items: center;
+        }
+
+        .action-list li a:hover {
+            color: #eb1d16; /* Change this to a hover color */
+        }
+
+        /* Optional: Change the color of icons */
+        .action-list li a i {
+            color: inherit; /* This will inherit the link color */
+            font-size: 20px;
+            
+        }
+        .btn_group .btn {
+            background-color: #2980b9; /* Default button background color */
+            color: #fff; /* Default text color */
+            border: none; /* No border */
+            padding: 10px 15px; /* Padding for the button */
+            border-radius: 4px; /* Rounded corners */
+            text-decoration: none; /* Remove underline from links */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+            position: relative; /* Positioning for tooltip */
+        }
+
+        .btn_group .btn:hover {
+            background-color: #d35400; /* Background color on hover */
+            transform: scale(1.05); /* Slightly enlarge the button */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .btn_group .tooltip {
+            visibility: hidden; /* Hidden by default */
+            width: 60px; /* Tooltip width */
+            background-color: #333; /* Tooltip background color */
+            color: #fff; /* Tooltip text color */
+            text-align: center; /* Centered text */
+            border-radius: 5px; /* Rounded corners */
+            padding: 5px; /* Padding for the tooltip */
+            position: absolute; /* Position relative to the button */
+            z-index: 1; /* Stack above other elements */
+            bottom: 125%; /* Position above the button */
+            left: 50%; /* Center the tooltip */
+            margin-left: -30px; /* Offset for centering */
+            opacity: 0; /* Initially invisible */
+            transition: opacity 0.3s; /* Smooth fade-in */
+        }
+
+        /*.btn_group .btn:hover .tooltip {
+            visibility: visible; 
+            opacity: 1;  } */
+
+        /* General styling for pagination container */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* Styling for the step links inside the pagination */
+        .pagination .step-links a {
+            color: #fff;
+            background-color: #d35400;  /* Background color for the links #e65a22*/
+            padding: 8px 12px;  /* Add padding for clickable area */
+            text-decoration: none;  /* Remove underline */
+            margin: 0 5px;  /* Spacing between links */
+            border-radius: 4px;  /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s;  /* Smooth hover effect */
+        }
+
+        /* Styling for the active or current page */
+        .pagination .current {
+            color: #fff;
+            font-weight: bold;
+            margin: 0 5px;  /* Spacing similar to links */
+        }
+
+        /* Hover effect for pagination links */
+        .pagination .step-links a:hover {
+            background-color: #fff;  /* Background color on hover */
+            color: #d35400;  /* Text color on hover */
+            border: 1px solid #d35400;  /* Add border for emphasis */
+        }
+
+        /* Disable default styling if using 'First' or 'Last' links */
+        .pagination .step-links a:disabled {
+            color: #ccc;  /* Lighter color for disabled links */
+            pointer-events: none;  /* Prevent clicking */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="menuButton">
+                        <li><a class="dropdown-item" href="{% url 'rohs_list' %}">TYC ROHS Data</a></li>
+                        <li><a class="dropdown-item" href="{% url 'reach_list' %}">TYC REACH Data</a></li>
+                    </ul>
+                </div>
+                <h4 class="title">TE CONNECTIVITY REACH DATA LIST</h4>
+                <div class="btn_group">
+                    <a href="{% url 'add_tycdata' %}" class="btn btn-default" title="ADD">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span class="tooltip">Add</span>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body table-container">
+                <!-- Search Form -->
+                <form method="GET" action="" class="form-inline mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ search_query }}" autofocus>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                                               
+
+                <table class="table" id="requestTable">
+                    <thead>
+                        <tr>
+                            <th>REQUESTED PART</th>
+                            <th>TE INTERNAL NUMBER</th>
+                            <th>PART STATUS</th>
+                            <th>REACH VERSION STATUS</th>
+                            <th>REACH COMPLIANT STATUS</th>
+                            <th>REACH SVHC SUBSTANCE</th>
+                            <th>ACTION</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        {% for row in page_obj %}
+                            <tr>
+                                <td>{{ row.requested_part }}</td>
+                                <td>{{ row.te_internal_number }}</td>
+                                <td>{{ row.part_status }}</td>
+                                <td>{{ row.reach_version_status }}</td>
+                                <td>{{ row.reach_compliant_status }}</td>
+                                <td class="large-text-cell">{{ row.reach_svhc_substance }}</td>
+                                <td><a href="{% url 'reach_edit' row.id %}" class="btn" data-tip="reach_edit">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a></td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" style="text-align: center;">No matching data found</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?q={{ search_query }}&page=1">&laquo; first</a>
+                        <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</body>
+
+
+
+</html>
